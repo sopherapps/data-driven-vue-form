@@ -33,11 +33,18 @@ __Don't use just yet. We are still building!__
 
 ### Data Schema
 
-The form has a prop called ```form-data``` that expects data that has the shape below
+The form receives props:
+
+- formData ('form-data' in template syntax)
+- style
+- submissionHandler (submission-handler in template syntax)
+- cancellationHandler (cancellation-handler in template syntax)
+- submissionButtonLabel (submission-button-label in template syntax)
+- cancellationButtonLabel (cancellation-button-label in template syntax)
 
 ```JavaScript
-{
-  components: [ // Array of objects with keys: 'type', 'value', 'options'
+const props = {
+  formData: [ // Array of objects with properties; 'type', 'value', 'options'
     /* e.g.
     {
       type: "text-field", value: "hello world",
@@ -55,7 +62,7 @@ The form has a prop called ```form-data``` that expects data that has the shape 
     */
   ],
   style: { // CSS style
-    /*
+    /*e.g.
     "background-color": "#fff"
     */
   },
@@ -72,7 +79,7 @@ The form has a prop called ```form-data``` that expects data that has the shape 
 }
 ```
 
-Each component in the 'components' property (shown above), must have at least one property; the __type__ property:
+Each item in the 'formData' property (shown above), must have at least one property; the __type__ property:
 
 <dl>
 <dt><strong>type</strong></dt>
