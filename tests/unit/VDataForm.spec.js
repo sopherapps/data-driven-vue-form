@@ -137,7 +137,7 @@ describe("VDataForm", () => {
       ).toMatch(cancellationButtonLabel);
     });
   });
-  describe("Submission", () => {
+  describe("Events", () => {
     beforeEach(() => {
       wrapper = mount(VDataForm, {
         propsData: {
@@ -155,26 +155,33 @@ describe("VDataForm", () => {
         }
       });
     });
-    // it("Calls validate on each form component", async () => {
-    //   wrapper.vm.$nextTick();
-    // });
 
-    it("Calls the submissionHandler prop function", async () => {
-      await wrapper.vm.$nextTick();
-      wrapper.find('[data-test="v-data-form-submission-btn"]').trigger("click");
-      await wrapper.vm.$nextTick();
-      expect(wrapper.emitted().submit.length).toBe(1);
-      expect(submissionHandler).toHaveBeenCalledWith(expectedFormOutput);
+    describe("submit", () => {
+      // it("Calls validate on each form component", async () => {
+      //   wrapper.vm.$nextTick();
+      // });
+
+      it("Calls the 'submit' event handler", async () => {
+        await wrapper.vm.$nextTick();
+        wrapper
+          .find('[data-test="v-data-form-submission-btn"]')
+          .trigger("click");
+        await wrapper.vm.$nextTick();
+        expect(wrapper.emitted().submit.length).toBe(1);
+        expect(submissionHandler).toHaveBeenCalledWith(expectedFormOutput);
+      });
+    });
+
+    describe("cancel", () => {
+      it("Calls the cancel event handler", async () => {
+        await wrapper.vm.$nextTick();
+        wrapper
+          .find('[data-test="v-data-form-cancellation-btn"]')
+          .trigger("click");
+        await wrapper.vm.$nextTick();
+        expect(wrapper.emitted().cancel.length).toBe(1);
+        expect(cancellationHandler).toHaveBeenCalledWith(expectedFormOutput);
+      });
     });
   });
-  // describe("Cancellation", () => {
-  //   it("Calls the cancellationHandler prop function", async () => {
-  //     await wrapper.vm.$nextTick();
-  //     await wrapper.find('[data-test="c-cancellation-btn"]').trigger("click");
-  //     expect(cancellationHandler.mock.calls.length).toBe(1);
-  //     expect(cancellationHandler.mock.results[0].value).toMatchObject(
-  //       expectedFormOutput
-  //     );
-  //   });
-  // });
 });

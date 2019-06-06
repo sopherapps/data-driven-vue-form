@@ -163,7 +163,7 @@ methods: {
 }
 ```
 
-__The formOutput is accessible to the submissionHandler and cancellationHandler prop functions.__
+__The formOutput is accessible to the 'submit' and 'cancel' event handlers.__
 
 ## Acknowledgements
 

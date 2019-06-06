@@ -8,12 +8,12 @@
       :ref="formItem.name"
       v-model="output[formItem.name]"
     ></v-data-form-item>
-    <v-btn data-test="v-data-form-submission-btn" @click="submit()">{{
-      submissionButtonLabel
-    }}</v-btn>
-    <v-btn data-test="v-data-form-cancellation-btn">{{
-      cancellationButtonLabel
-    }}</v-btn>
+    <v-btn data-test="v-data-form-submission-btn" @click="submit()">
+      {{ submissionButtonLabel }}
+    </v-btn>
+    <v-btn data-test="v-data-form-cancellation-btn" @click="cancel()">
+      {{ cancellationButtonLabel }}
+    </v-btn>
   </div>
 </template>
 
@@ -43,11 +43,11 @@ export default {
     },
     submissionButtonLabel: {
       type: String,
-      default: "submit" // Defaults to 'submit'
+      default: "submit"
     },
     cancellationButtonLabel: {
       type: String,
-      default: "cancel" // Defaults to 'cancel'
+      default: "cancel"
     }
   },
   computed: {
@@ -64,7 +64,7 @@ export default {
     submit() {
       this.$emit("submit", this.output);
     },
-    onCancel() {
+    cancel() {
       this.$emit("cancel", this.output);
     },
     generateOutput() {
