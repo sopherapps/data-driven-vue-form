@@ -55,8 +55,16 @@ props: {
       type: "autocomplete", value: "", name: 'district',
       options: {
         items: ['Hoima', 'Kampala', 'Wakiso'],
-      }
+      },
     },
+    {
+      type: "radio-group",
+      value: "Kampala",
+      children: [
+        { type: "radio", value: "Kampala", options: { label: "Kampala" } },
+        { type: "radio", value: "Jinja", options: { label: "Jinja" } }
+      ]
+    }
     */
   ],
   styleObj: { // CSS style
@@ -80,7 +88,11 @@ This is the name of the type of element to render. It can be any of the followin
 - 'textarea'
 - 'select'
 - 'autocomplete'
-- 'button'
+- 'switch'
+- 'radio'
+- 'radio-group'
+- 'combobox'
+- 'checkbox'
 
 More are being added to the list.
 </dd>
@@ -90,7 +102,7 @@ This is the unique name of that element. It is the key while the element's value
 </dd>
 </dl>
 
-It can also have two other properties; __value__ and __options__
+It can also have three other properties; __value__, __options__ and __children__
 
 <dl>
 <dt><strong>value</strong></dt>
@@ -107,6 +119,13 @@ This contains any extra props to add to the rendered element. It should be an ob
 <br />
 <br />
 To get the possible props for any given element type, search for that type on the <a href="https://vuetifyjs.com/en/components/api-explorer" target="_blank">vuetify component explorer</a>.
+</dd>
+
+<dt><strong>children</strong></dt>
+<dd>
+This is a list of child element that the current element will wrap around. An example is a <strong>radio-group</strong> has a number of child <strong>radio</strong> elements.
+
+Each child element can also have a name, type, options and other children.
 </dd>
 </dl>
 
