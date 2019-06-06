@@ -1,4 +1,4 @@
-import { shallowMount } from "@vue/test-utils";
+import { shallowMount, mount } from "@vue/test-utils";
 import Vue from "vue";
 import Vuetify from "vuetify";
 import VDataFormItem from "../../src/components/VDataFormItem.vue";
@@ -46,14 +46,13 @@ describe("VDataForm", () => {
       }
     }
   ];
-  // const expectedFormOutput = {
-  //   first: "hello world",
-  //   second: "hello world",
-  //   third: "hello world",
-  //   firstButton: "submit",
-  //   district: "Jinja",
-  //   town: "Kampala"
-  // };
+  const expectedFormOutput = {
+    first: "hello world",
+    second: "hello world",
+    third: "hello world",
+    district: "Jinja",
+    town: "Kampala"
+  };
   const submissionHandler = jest.fn(formOutput => formOutput);
   const cancellationHandler = jest.fn(formOutput => formOutput);
   const styleObj = {
@@ -64,20 +63,18 @@ describe("VDataForm", () => {
   const cancellationButtonLabel = "Back";
   let wrapper;
 
-  beforeEach(() => {
-    wrapper = shallowMount(VDataForm, {
-      propsData: {
-        formData,
-        styleObj,
-        submissionHandler,
-        cancellationHandler,
-        submissionButtonLabel,
-        cancellationButtonLabel
-      }
-    });
-  });
-
   describe("UI", () => {
+    beforeEach(() => {
+      wrapper = shallowMount(VDataForm, {
+        propsData: {
+          formData,
+          styleObj,
+          submissionButtonLabel,
+          cancellationButtonLabel
+        }
+      });
+    });
+
     it("Throws error if any item in formData lacks the name or type property", async () => {
       await wrapper.vm.$nextTick();
       const formDataLackingName = formData.concat([
@@ -140,20 +137,36 @@ describe("VDataForm", () => {
       ).toMatch(cancellationButtonLabel);
     });
   });
-  // describe("Submission", () => {
-  //   // it("Calls validate on each form component", async () => {
-  //   //   wrapper.vm.$nextTick();
-  //   // });
+  describe("Submission", () => {
+    beforeEach(() => {
+      wrapper = mount(VDataForm, {
+        propsData: {
+          formData,
+          styleObj,
+          submissionButtonLabel,
+          cancellationButtonLabel
+        },
+        stubs: {
+          VDataFormItem: true
+        },
+        listeners: {
+          submit: submissionHandler,
+          cancel: cancellationHandler
+        }
+      });
+    });
+    // it("Calls validate on each form component", async () => {
+    //   wrapper.vm.$nextTick();
+    // });
 
-  //   it("Calls the submissionHandler prop function", async () => {
-  //     await wrapper.vm.$nextTick();
-  //     await wrapper.find('[data-test="c-submission-btn"]').trigger("click");
-  //     expect(submissionHandler.mock.calls.length).toBe(1);
-  //     expect(submissionHandler.mock.results[0].value).toMatchObject(
-  //       expectedFormOutput
-  //     );
-  //   });
-  // });
+    it("Calls the submissionHandler prop function", async () => {
+      await wrapper.vm.$nextTick();
+      wrapper.find('[data-test="v-data-form-submission-btn"]').trigger("click");
+      await wrapper.vm.$nextTick();
+      expect(wrapper.emitted().submit.length).toBe(1);
+      expect(submissionHandler).toHaveBeenCalledWith(expectedFormOutput);
+    });
+  });
   // describe("Cancellation", () => {
   //   it("Calls the cancellationHandler prop function", async () => {
   //     await wrapper.vm.$nextTick();

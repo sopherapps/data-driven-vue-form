@@ -3,17 +3,17 @@
     <v-data-form-item
       v-for="formItem in formData"
       :type="formItem.type"
-      :value="formItem.value"
       :options="formItem.options"
       :key="formItem.name"
       :ref="formItem.name"
+      v-model="output[formItem.name]"
     ></v-data-form-item>
-    <v-btn data-test="v-data-form-submission-btn">
-      {{ submissionButtonLabel }}
-    </v-btn>
-    <v-btn data-test="v-data-form-cancellation-btn">
-      {{ cancellationButtonLabel }}
-    </v-btn>
+    <v-btn data-test="v-data-form-submission-btn" @click="submit()">{{
+      submissionButtonLabel
+    }}</v-btn>
+    <v-btn data-test="v-data-form-cancellation-btn">{{
+      cancellationButtonLabel
+    }}</v-btn>
   </div>
 </template>
 
@@ -41,16 +41,6 @@ export default {
       type: Object,
       default: () => ({})
     },
-    submissionHandler: {
-      // do this after SUBMIT button is clicked)
-      type: Function,
-      default: () => ({})
-    },
-    cancellationHandler: {
-      // Do this after CANCEL button is clicked)
-      type: Function,
-      default: () => ({})
-    },
     submissionButtonLabel: {
       type: String,
       default: "submit" // Defaults to 'submit'
@@ -69,6 +59,27 @@ export default {
       });
       return styleString;
     }
+  },
+  methods: {
+    submit() {
+      this.$emit("submit", this.output);
+    },
+    onCancel() {
+      this.$emit("cancel", this.output);
+    },
+    generateOutput() {
+      const tmp = {};
+      this.formData.forEach(formItem => {
+        tmp[formItem.name] = formItem.value;
+      });
+      this.output = { ...tmp };
+    }
+  },
+  data: () => ({
+    output: {}
+  }),
+  mounted() {
+    this.generateOutput();
   }
 };
 </script>

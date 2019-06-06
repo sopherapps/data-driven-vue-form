@@ -36,14 +36,12 @@ __Don't use just yet. We are still building!__
 The form receives props:
 
 - formData ('form-data' in template syntax)
-- style
-- submissionHandler (submission-handler in template syntax)
-- cancellationHandler (cancellation-handler in template syntax)
+- styleObj
 - submissionButtonLabel (submission-button-label in template syntax)
 - cancellationButtonLabel (cancellation-button-label in template syntax)
 
 ```JavaScript
-const props = {
+props: {
   formData: [ // Array of objects with properties; 'type', 'name', 'value', 'options'
     /* e.g.
     {
@@ -64,22 +62,6 @@ const props = {
   styleObj: { // CSS style
     /*e.g.
     "background-color": "#fff"
-    */
-  },
-  submissionHandler: (formOutput) => {
-    /* Do Something on submission
-    (i.e. after SUBMIT button is clicked)*/
-    /* formOutput is the data output of the form:
-    It is kind like the form-data that is sent to the server
-    by HTML forms using the signature {[nameOfInput: string]: value}
-    */
-  },
-  cancellationHandler: (formOutput) => {
-    /* Do something on cancellation
-    (i.e. after CANCEL button is clicked)*/
-    /* formOutput is the data output of the form:
-    It is kind like the form-data that is sent to the server
-    by HTML forms using the signature {[nameOfInput: string]: value}
     */
   },
   submissionButtonLabel: '', // Defaults to 'submit'
@@ -135,9 +117,49 @@ The form has a property called ```formOutput``` which is an object holding the v
 For example, basing on the example 'formData' property of the props in the code section under 'Data Schema', here is the formOutput
 
 ```JavaScript
-const formOutput = {
+output: {
   greetingInput: 'hello world',
   district: 'Kampala', // In case the user selected Kampala
+}
+```
+
+### Events
+
+The form emits two major events.
+
+<dl>
+<dt><strong>submit</strong></dt>
+<dd>This is emitted when the SUBMIT button is clicked.
+<br />
+It calls its handler with the form's <strong>output</strong> as the first parameter.
+</dd>
+<dt><strong>cancel</strong></dt>
+<dd>This is emitted when the CANCEL button is clicked.
+<br />
+It calls its handler with the form's <strong>output</strong> as the first parameter.
+</dd>
+</dl>
+
+An example of what the handers would look like in say a 'methods' section of the parent component, is shown below:
+
+```JavaScript
+methods: {
+    submissionHandler: (formOutput) => {
+      /* Do Something on submission
+      (i.e. after SUBMIT button is clicked)*/
+      /* formOutput is the data output of the form:
+      It is kind like the form-data that is sent to the server
+      by HTML forms using the signature {[nameOfInput: string]: value}
+      */
+    },
+    cancellationHandler: (formOutput) => {
+      /* Do something on cancellation
+      (i.e. after CANCEL button is clicked)*/
+      /* formOutput is the data output of the form:
+      It is kind like the form-data that is sent to the server
+      by HTML forms using the signature {[nameOfInput: string]: value}
+      */
+    }
 }
 ```
 
