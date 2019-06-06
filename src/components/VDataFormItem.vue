@@ -10,13 +10,30 @@
 </template>
 
 <script>
+import CAutocomplete from "./custom/CAutocomplete";
+import CBtn from "./custom/CBtn";
+import CInput from "./custom/CInput";
+import CSelect from "./custom/CSelect";
+import CTextarea from "./custom/CTextarea";
+import CTextField from "./custom/CTextField";
+
 export const ALLOWED_COMPONENTS = new Map([
-  ["input", "v-input"],
-  ["select", "v-select"],
-  ["autocomplete", "v-autocomplete"],
-  ["button", "v-btn"]
+  ["autocomplete", "c-autocomplete"],
+  ["button", "c-btn"],
+  ["input", "c-input"],
+  ["select", "c-select"],
+  ["textarea", "c-textarea"],
+  ["text-field", "c-text-field"]
 ]);
 export default {
+  components: {
+    CAutocomplete,
+    CBtn,
+    CInput,
+    CSelect,
+    CTextarea,
+    CTextField
+  },
   props: {
     type: {
       type: String,

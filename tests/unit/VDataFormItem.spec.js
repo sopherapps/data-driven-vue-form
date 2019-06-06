@@ -12,31 +12,26 @@ const testComponentType = propsData => {
       propsData
     });
 
-    // console.log(wrapper.vm);
-
-    it("Has a tag that is the same as that passed as the type prop", () => {
+    it("Has a tag that is the same as that passed as the type prop", async () => {
+      await wrapper.vm.$nextTick();
       // @ts-ignore
       expect(wrapper.vm.$refs.component.$options._componentTag).toBe(
         vComponentType
       );
     });
-    it("Has value that is passed as the value prop", () => {
+    it("Has value that is passed as the value prop", async () => {
+      await wrapper.vm.$nextTick();
       // @ts-ignore
       expect(wrapper.vm.$refs.component.value).toBe(propsData.value);
     });
-    it("has the keys in the options prop as attributes for the Form Component", () => {
+    it("has the keys in the options prop as attributes for the Form Component", async () => {
+      await wrapper.vm.$nextTick();
       const optionKeys = Object.keys(propsData.options);
       const component = wrapper.vm.$refs.component;
       const mergedAttrsAndProps = { ...component.$attrs, ...component._props };
-      // console.log(mergedAttrsAndProps);
+
       optionKeys.forEach(key => {
-        // @ts-ignore
-        expect(
-          /*wrapper.vm.$refs.component._props*/ mergedAttrsAndProps[key]
-        ).toBe(
-          /*$attrs*/
-          propsData.options[key]
-        );
+        expect(mergedAttrsAndProps[key]).toBe(propsData.options[key]);
       });
     });
   });
@@ -53,6 +48,18 @@ describe("FlexibleFormInput", () => {
       }
     },
     {
+      type: "text-field",
+      value: "hello world",
+      options: {
+        type: "email"
+      }
+    },
+    {
+      type: "textarea",
+      value: "hello world",
+      options: {}
+    },
+    {
       type: "button",
       value: "submit",
       options: {
@@ -65,14 +72,14 @@ describe("FlexibleFormInput", () => {
       options: {
         items: ["Kampala", "Jinja"]
       }
+    },
+    {
+      type: "select",
+      value: "Kampala",
+      options: {
+        items: ["Kampala", "Jinja"]
+      }
     }
-    // {
-    //   type: "select",
-    //   value: "Kampala",
-    //   options: {
-    //     items: ["Kampala", "Jinja"]
-    //   }
-    // }
   ];
   propsDataList.forEach(propsData => {
     testComponentType(propsData);
