@@ -131,13 +131,14 @@ describe("VDataForm", () => {
       ).toMatch(submissionButtonLabel);
     });
 
-    // it("Sets the label of the Cancellation button as the \
-    // cancellationButtonLabel prop value", async () => {
-    //   wrapper.vm.$nextTick();
-    //   expect(wrapper.vm.$refs.cancellationBtn.vm.label).toBe(
-    //     cancellationButtonLabel
-    //   );
-    // });
+    it("Sets the label of the Cancellation button as the \
+    cancellationButtonLabel prop value", async () => {
+      wrapper.vm.$nextTick();
+      expect(
+        wrapper.find('[data-test="v-data-form-cancellation-btn"]').element
+          .innerHTML
+      ).toMatch(cancellationButtonLabel);
+    });
   });
   // describe("Submission", () => {
   //   // it("Calls validate on each form component", async () => {

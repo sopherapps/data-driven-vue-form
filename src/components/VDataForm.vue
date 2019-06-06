@@ -8,9 +8,12 @@
       :key="formItem.name"
       :ref="formItem.name"
     ></v-data-form-item>
-    <v-btn data-test="v-data-form-submission-btn">{{
-      submissionButtonLabel
-    }}</v-btn>
+    <v-btn data-test="v-data-form-submission-btn">
+      {{ submissionButtonLabel }}
+    </v-btn>
+    <v-btn data-test="v-data-form-cancellation-btn">
+      {{ cancellationButtonLabel }}
+    </v-btn>
   </div>
 </template>
 
