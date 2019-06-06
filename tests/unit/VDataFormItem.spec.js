@@ -84,6 +84,14 @@ describe("FlexibleFormInput", () => {
         label: "Kampala",
         color: "red"
       }
+    },
+    {
+      type: "switch",
+      value: "false",
+      options: {
+        label: "Kampala",
+        color: "red"
+      }
     }
   ];
   propsDataList.forEach(propsData => {

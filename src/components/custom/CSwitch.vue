@@ -1,13 +1,18 @@
 <template>
-  <v-radio v-model="model" v-bind="options" @change="onChange" @input="onInput">
+  <v-switch
+    v-model="model"
+    v-bind="options"
+    @change="onChange"
+    @input="onInput"
+  >
     <slot />
-  </v-radio>
+  </v-switch>
 </template>
 
 <script>
 import CustomComponentMixin from "../mixins/CustomComponentMixin";
 export default {
-  name: "c-radio",
+  name: "c-switch",
   mixins: [CustomComponentMixin]
 };
 </script>

@@ -29,6 +29,7 @@ import CInput from "./custom/CInput";
 import CRadio from "./custom/CRadio";
 import CRadioGroup from "./custom/CRadioGroup";
 import CSelect from "./custom/CSelect";
+import CSwitch from "./custom/CSwitch";
 import CTextarea from "./custom/CTextarea";
 import CTextField from "./custom/CTextField";
 
@@ -39,6 +40,7 @@ export const ALLOWED_COMPONENTS = new Map([
   ["radio", "c-radio"],
   ["radio-group", "c-radio-group"],
   ["select", "c-select"],
+  ["switch", "c-switch"],
   ["textarea", "c-textarea"],
   ["text-field", "c-text-field"]
 ]);
@@ -51,6 +53,7 @@ export default {
     CRadio,
     CRadioGroup,
     CSelect,
+    CSwitch,
     CTextarea,
     CTextField
   },
