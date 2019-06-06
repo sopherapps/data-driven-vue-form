@@ -30,14 +30,6 @@ describe("VDataForm", () => {
       options: {}
     },
     {
-      type: "button",
-      name: "firstButton",
-      value: "submit",
-      options: {
-        onclick: () => 2
-      }
-    },
-    {
       type: "autocomplete",
       value: "Jinja",
       name: "district",
@@ -130,13 +122,14 @@ describe("VDataForm", () => {
       ).toMatch(styleString.trim());
     });
 
-    // it("Sets the label of the Submission button as the \
-    // submissionButtonLabel prop value", async () => {
-    //   wrapper.vm.$nextTick();
-    //   expect(wrapper.vm.$refs.submissionBtn.vm.label).toBe(
-    //     submissionButtonLabel
-    //   );
-    // });
+    it("Sets the label of the Submission button as the \
+    submissionButtonLabel prop value", async () => {
+      wrapper.vm.$nextTick();
+      expect(
+        wrapper.find('[data-test="v-data-form-submission-btn"]').element
+          .innerHTML
+      ).toMatch(submissionButtonLabel);
+    });
 
     // it("Sets the label of the Cancellation button as the \
     // cancellationButtonLabel prop value", async () => {

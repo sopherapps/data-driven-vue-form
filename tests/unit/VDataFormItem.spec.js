@@ -64,13 +64,6 @@ describe("FlexibleFormInput", () => {
       options: {}
     },
     {
-      type: "button",
-      value: "submit",
-      options: {
-        onclick: () => 2
-      }
-    },
-    {
       type: "autocomplete",
       value: "Kampala",
       options: {
