@@ -25,6 +25,7 @@
 import CAutocomplete from "./custom/CAutocomplete";
 
 import CCheckbox from "./custom/CCheckbox";
+import CCombobox from "./custom/CCombobox";
 import CInput from "./custom/CInput";
 import CRadio from "./custom/CRadio";
 import CRadioGroup from "./custom/CRadioGroup";
@@ -36,6 +37,7 @@ import CTextField from "./custom/CTextField";
 export const ALLOWED_COMPONENTS = new Map([
   ["autocomplete", "c-autocomplete"],
   ["checkbox", "c-checkbox"],
+  ["combobox", "c-combobox"],
   ["input", "c-input"],
   ["radio", "c-radio"],
   ["radio-group", "c-radio-group"],
@@ -49,6 +51,7 @@ export default {
   components: {
     CAutocomplete,
     CCheckbox,
+    CCombobox,
     CInput,
     CRadio,
     CRadioGroup,

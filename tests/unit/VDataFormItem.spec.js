@@ -71,6 +71,13 @@ describe("FlexibleFormInput", () => {
       }
     },
     {
+      type: "combobox",
+      value: "Kampala",
+      options: {
+        items: ["Kampala", "Jinja"]
+      }
+    },
+    {
       type: "select",
       value: "Kampala",
       options: {
