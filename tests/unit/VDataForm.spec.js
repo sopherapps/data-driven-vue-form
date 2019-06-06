@@ -139,6 +139,7 @@ describe("VDataForm", () => {
   });
   describe("Events", () => {
     beforeEach(() => {
+      jest.resetAllMocks();
       wrapper = mount(VDataForm, {
         propsData: {
           formData,
@@ -157,12 +158,20 @@ describe("VDataForm", () => {
     });
 
     describe("submit", () => {
-      // it("Calls validate on each form component", async () => {
-      // stub the vdataformitem and add a validate func on it
-      // go to the tests for the items and put a test for validate
-      // then go improve the apeearance and set up a proper example
-      //   wrapper.vm.$nextTick();
-      // });
+      it("Calls validate on the form component", async () => {
+        await wrapper.vm.$nextTick();
+        const originalValidate = wrapper.vm.$refs.formRoot.validate;
+        const mockValidation = jest.fn(() => ({}));
+        wrapper.vm.$refs.formRoot.validate = mockValidation;
+
+        wrapper
+          .find('[data-test="v-data-form-submission-btn"]')
+          .trigger("click");
+        await wrapper.vm.$nextTick();
+        expect(mockValidation).toHaveBeenCalledTimes(1);
+
+        wrapper.vm.$refs.formRoot.validate = originalValidate;
+      });
 
       it("Calls the 'submit' event handler", async () => {
         await wrapper.vm.$nextTick();

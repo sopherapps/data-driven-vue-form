@@ -1,20 +1,25 @@
 <template>
-  <div :style="formInlineStyle" data-test="v-data-form-root">
+  <v-form
+    v-model="valid"
+    lazy-validation
+    ref="formRoot"
+    :style="formInlineStyle"
+    data-test="v-data-form-root"
+  >
     <v-data-form-item
       v-for="formItem in formData"
       :type="formItem.type"
       :options="formItem.options"
       :key="formItem.name"
-      :ref="formItem.name"
       v-model="output[formItem.name]"
     ></v-data-form-item>
-    <v-btn data-test="v-data-form-submission-btn" @click="submit()">
-      {{ submissionButtonLabel }}
-    </v-btn>
-    <v-btn data-test="v-data-form-cancellation-btn" @click="cancel()">
-      {{ cancellationButtonLabel }}
-    </v-btn>
-  </div>
+    <v-btn data-test="v-data-form-submission-btn" @click="submit()">{{
+      submissionButtonLabel
+    }}</v-btn>
+    <v-btn data-test="v-data-form-cancellation-btn" @click="cancel()">{{
+      cancellationButtonLabel
+    }}</v-btn>
+  </v-form>
 </template>
 
 <script>
@@ -61,8 +66,13 @@ export default {
     }
   },
   methods: {
+    resetValidation() {
+      this.$refs.formRoot.resetValidation();
+    },
     submit() {
-      this.$emit("submit", this.output);
+      if (this.$refs.formRoot.validate()) {
+        this.$emit("submit", this.output);
+      }
     },
     cancel() {
       this.$emit("cancel", this.output);
@@ -76,7 +86,8 @@ export default {
     }
   },
   data: () => ({
-    output: {}
+    output: {},
+    valid: true
   }),
   mounted() {
     this.generateOutput();
