@@ -37,7 +37,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: "input",
+      default: "text-field",
       validator: value => ALLOWED_COMPONENTS.has(value)
     },
     value: {
