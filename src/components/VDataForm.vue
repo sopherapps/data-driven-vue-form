@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :style="formInlineStyle" data-test="v-data-form-root">
     <v-data-form-item
       v-for="formItem in formData"
       :type="formItem.type"
@@ -52,6 +52,16 @@ export default {
     cancellationButtonLabel: {
       type: String,
       default: "cancel" // Defaults to 'cancel'
+    }
+  },
+  computed: {
+    formInlineStyle() {
+      const styleProps = Object.keys(this.styleObj);
+      let styleString = "";
+      styleProps.forEach(styleProp => {
+        styleString += `${styleProp}: ${this.styleObj[styleProp]};`;
+      });
+      return styleString;
     }
   }
 };

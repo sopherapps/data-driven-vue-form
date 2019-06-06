@@ -65,7 +65,7 @@ describe("VDataForm", () => {
   const submissionHandler = jest.fn(formOutput => formOutput);
   const cancellationHandler = jest.fn(formOutput => formOutput);
   const styleObj = {
-    "background-color": "#fff",
+    "background-color": "black",
     "font-size": "11px"
   };
   const submissionButtonLabel = "Next";
@@ -117,10 +117,18 @@ describe("VDataForm", () => {
       );
     });
 
-    // it("Adds the style prop to the styles of the form", async () => {
-    //   wrapper.vm.$nextTick();
-    //   expect(wrapper.vm.hasStyle(style)).toBe(true);
-    // });
+    it("Adds the style prop to the styles of the form", async () => {
+      wrapper.vm.$nextTick();
+      const styleProps = Object.keys(styleObj);
+      let styleString = "";
+      styleProps.forEach(styleProp => {
+        styleString += `${styleProp}: ${styleObj[styleProp]}; `;
+      });
+
+      expect(
+        wrapper.find('[data-test="v-data-form-root"]').attributes("style")
+      ).toMatch(styleString.trim());
+    });
 
     // it("Sets the label of the Submission button as the \
     // submissionButtonLabel prop value", async () => {
