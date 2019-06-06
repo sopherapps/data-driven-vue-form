@@ -4,7 +4,8 @@
     v-bind="options"
     @change="onChange"
     @input="onInput"
-  ></v-autocomplete>
+    ><slot
+  /></v-autocomplete>
 </template>
 
 <script>

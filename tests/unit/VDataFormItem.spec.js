@@ -1,4 +1,4 @@
-import { shallowMount } from "@vue/test-utils";
+import { shallowMount, mount } from "@vue/test-utils";
 import Vue from "vue";
 import Vuetify from "vuetify";
 import VDataFormItem, {
@@ -88,5 +88,36 @@ describe("FlexibleFormInput", () => {
   ];
   propsDataList.forEach(propsData => {
     testComponentType(propsData);
+  });
+
+  describe("Component Groups", () => {
+    const radioGroup = {
+      type: "radio-group",
+      value: "Kampala",
+      children: [
+        { type: "radio", value: "Kampala", options: { label: "Kampala" } },
+        { type: "radio", value: "Jinja", options: { label: "Jinja" } }
+      ]
+    };
+    it("Renders items in the children property\
+     as VDataFormItem objects that are children to main component", async () => {
+      let wrapper = mount(VDataFormItem, {
+        propsData: radioGroup
+      });
+      await wrapper.vm.$nextTick();
+      const allChildDataFormItems = wrapper.findAll(
+        '[data-test="v-data-form-item-children"]'
+      ).wrappers;
+      const allPropsOfChildDataFormItems = allChildDataFormItems.map(formItem =>
+        formItem.props()
+      );
+      const expectedRadioProps = radioGroup.children.map(radioData => ({
+        children: [],
+        ...radioData
+      }));
+      expect(allPropsOfChildDataFormItems).toEqual(
+        expect.arrayContaining(expectedRadioProps)
+      );
+    });
   });
 });

@@ -4,7 +4,9 @@
     v-bind="options"
     @change="onChange"
     @input="onInput"
-  ></v-checkbox>
+  >
+    <slot />
+  </v-checkbox>
 </template>
 
 <script>

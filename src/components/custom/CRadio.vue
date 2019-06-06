@@ -1,18 +1,13 @@
 <template>
-  <v-textarea
-    v-model="model"
-    v-bind="options"
-    @change="onChange"
-    @input="onInput"
-  >
+  <v-radio value="model" v-bind="options" @change="onChange" @input="onInput">
     <slot />
-  </v-textarea>
+  </v-radio>
 </template>
 
 <script>
 import CustomComponentMixin from "../mixins/CustomComponentMixin";
 export default {
-  name: "c-textarea",
+  name: "c-radio",
   mixins: [CustomComponentMixin]
 };
 </script>

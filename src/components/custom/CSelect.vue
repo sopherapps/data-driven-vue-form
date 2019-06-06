@@ -4,7 +4,9 @@
     v-bind="options"
     @change="onChange"
     @input="onInput"
-  ></v-select>
+  >
+    <slot />
+  </v-select>
 </template>
 
 <script>

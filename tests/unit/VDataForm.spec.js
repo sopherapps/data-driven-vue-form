@@ -99,7 +99,8 @@ describe("VDataForm", () => {
       const formDataWithoutNames = formData.map(({ options, type, value }) => ({
         options,
         type,
-        value
+        value,
+        children: []
       }));
       expect(allPropsOfDataFormItems).toEqual(
         expect.arrayContaining(formDataWithoutNames)
