@@ -28,7 +28,11 @@ const testComponentType = propsData => {
       await wrapper.vm.$nextTick();
       const optionKeys = Object.keys(propsData.options);
       const component = wrapper.vm.$refs.component;
-      const mergedAttrsAndProps = { ...component.$attrs, ...component._props };
+      const mergedAttrsAndProps = Object.assign(
+        {},
+        component.$attrs,
+        component._props
+      );
 
       optionKeys.forEach(key => {
         expect(mergedAttrsAndProps[key]).toBe(propsData.options[key]);

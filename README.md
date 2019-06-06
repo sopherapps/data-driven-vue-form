@@ -44,42 +44,50 @@ The form receives props:
 
 ```JavaScript
 const props = {
-  formData: [ // Array of objects with properties; 'type', 'value', 'options'
+  formData: [ // Array of objects with properties; 'type', 'name', 'value', 'options'
     /* e.g.
     {
-      type: "text-field", value: "hello world",
+      type: "text-field", value: "hello world", name: 'greetingInput',
       options: {
         style: {color: "blue"},
         onclick: () => alert('clicked')
       }
     },
     {
-      type: "autocomplete", value: "",
+      type: "autocomplete", value: "", name: 'district',
       options: {
         items: ['Hoima', 'Kampala', 'Wakiso'],
       }
     },
     */
   ],
-  style: { // CSS style
+  styleObj: { // CSS style
     /*e.g.
     "background-color": "#fff"
     */
   },
-  submissionHandler: (e) => {
+  submissionHandler: (formOutput) => {
     /* Do Something on submission
     (i.e. after SUBMIT button is clicked)*/
+    /* formOutput is the data output of the form:
+    It is kind like the form-data that is sent to the server
+    by HTML forms using the signature {[nameOfInput: string]: value}
+    */
   },
-  cancellationHandler: (e) => {
-    /* Do something on cancellation 
+  cancellationHandler: (formOutput) => {
+    /* Do something on cancellation
     (i.e. after CANCEL button is clicked)*/
+    /* formOutput is the data output of the form:
+    It is kind like the form-data that is sent to the server
+    by HTML forms using the signature {[nameOfInput: string]: value}
+    */
   },
   submissionButtonLabel: '', // Defaults to 'submit'
   cancellationButtonLabel: '', // Defaults to 'cancel'
 }
 ```
 
-Each item in the 'formData' property (shown above), must have at least one property; the __type__ property:
+Each item in the 'formData' property (shown above), must have at least two properties; the __type__ and the __name__:
 
 <dl>
 <dt><strong>type</strong></dt>
@@ -93,6 +101,10 @@ This is the name of the type of element to render. It can be any of the followin
 - 'button'
 
 More are being added to the list.
+</dd>
+<dt><strong>name</strong></dt>
+<dd>
+This is the unique name of that element. It is the key while the element's value is the value in the <strong>formOut</strong> property (see the output section) of the form.
 </dd>
 </dl>
 
@@ -115,6 +127,21 @@ This contains any extra props to add to the rendered element. It should be an ob
 To get the possible props for any given element type, search for that type on the <a href="https://vuetifyjs.com/en/components/api-explorer" target="_blank">vuetify component explorer</a>.
 </dd>
 </dl>
+
+### Output
+
+The form has a property called ```formOutput``` which is an object holding the values of each element in the form, the keys being the names of those elements.
+
+For example, basing on the example 'formData' property of the props in the code section under 'Data Schema', here is the formOutput
+
+```JavaScript
+const formOutput = {
+  greetingInput: 'hello world',
+  district: 'Kampala', // In case the user selected Kampala
+}
+```
+
+__The formOutput is accessible to the submissionHandler and cancellationHandler prop functions.__
 
 ## Acknowledgements
 

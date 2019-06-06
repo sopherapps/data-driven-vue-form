@@ -8,9 +8,16 @@ export default {
     formData: {
       // Array of objects with properties; 'type', 'value', 'options'
       type: Array,
-      default: () => []
+      default: () => [],
+      validator: value =>
+        value.reduce(
+          (accumulator, currentValue) =>
+            accumulator &&
+            currentValue.hasOwnProperty("name") &&
+            currentValue.hasOwnProperty("type")
+        )
     },
-    style: {
+    styleObj: {
       // CSS style
       type: Object,
       default: () => ({})
