@@ -9,7 +9,7 @@ A vue form whose UI and behaviour are only determined by the data input in it.
 
 ## Usage
 
-__Don't just use yet. We are still building!__
+__Don't use just yet. We are still building!__
 
 ### Installation
 
