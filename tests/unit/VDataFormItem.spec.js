@@ -76,6 +76,14 @@ describe("FlexibleFormInput", () => {
       options: {
         items: ["Kampala", "Jinja"]
       }
+    },
+    {
+      type: "checkbox",
+      value: "false",
+      options: {
+        label: "Kampala",
+        color: "red"
+      }
     }
   ];
   propsDataList.forEach(propsData => {
