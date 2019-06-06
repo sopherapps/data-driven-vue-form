@@ -1,9 +1,22 @@
 <template>
-  <div />
+  <div>
+    <v-data-form-item
+      v-for="formItem in formData"
+      :type="formItem.type"
+      :value="formItem.value"
+      :options="formItem.options"
+      :key="formItem.name"
+      :ref="formItem.name"
+    ></v-data-form-item>
+  </div>
 </template>
 
 <script>
+import VDataFormItem from "./VDataFormItem.vue";
 export default {
+  components: {
+    VDataFormItem
+  },
   props: {
     formData: {
       // Array of objects with properties; 'type', 'value', 'options'

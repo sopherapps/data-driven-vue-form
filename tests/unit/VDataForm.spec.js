@@ -1,6 +1,7 @@
-import { mount } from "@vue/test-utils";
+import { shallowMount } from "@vue/test-utils";
 import Vue from "vue";
 import Vuetify from "vuetify";
+import VDataFormItem from "../../src/components/VDataFormItem.vue";
 import VDataForm from "../../src/components/VDataForm.vue";
 
 describe("VDataForm", () => {
@@ -72,7 +73,7 @@ describe("VDataForm", () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(VDataForm, {
+    wrapper = shallowMount(VDataForm, {
       propsData: {
         formData,
         styleObj,
@@ -99,11 +100,22 @@ describe("VDataForm", () => {
       expect(formDataProp.validator(formData)).toBeTruthy();
     });
 
-    // it("Mounts VDataFormItem components,\
-    // one for each item in the formData prop", async () => {
-    //   wrapper.vm.$nextTick();
-    //   expect(wrapper.vm.children).toEqual(expect.arrayContaining(formData));
-    // });
+    it("Mounts VDataFormItem components,\
+    one for each item in the formData prop", async () => {
+      wrapper.vm.$nextTick();
+      const allDataFormItems = wrapper.findAll(VDataFormItem).wrappers;
+      const allPropsOfDataFormItems = allDataFormItems.map(formItem =>
+        formItem.props()
+      );
+      const formDataWithoutNames = formData.map(({ options, type, value }) => ({
+        options,
+        type,
+        value
+      }));
+      expect(allPropsOfDataFormItems).toEqual(
+        expect.arrayContaining(formDataWithoutNames)
+      );
+    });
 
     // it("Adds the style prop to the styles of the form", async () => {
     //   wrapper.vm.$nextTick();
