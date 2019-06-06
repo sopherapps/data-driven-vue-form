@@ -158,6 +158,9 @@ describe("VDataForm", () => {
 
     describe("submit", () => {
       // it("Calls validate on each form component", async () => {
+      // stub the vdataformitem and add a validate func on it
+      // go to the tests for the items and put a test for validate
+      // then go improve the apeearance and set up a proper example
       //   wrapper.vm.$nextTick();
       // });
 
