@@ -24,19 +24,12 @@ const testComponentType = propsData => {
       // @ts-ignore
       expect(wrapper.vm.$refs.component.value).toBe(propsData.value);
     });
-    it("has the keys in the options prop as attributes for the Form Component", async () => {
+    it("has its options prop equal to that passed as\
+    options prop passed to VDataFormItem", async () => {
       await wrapper.vm.$nextTick();
-      const optionKeys = Object.keys(propsData.options);
-      const component = wrapper.vm.$refs.component;
-      const mergedAttrsAndProps = Object.assign(
-        {},
-        component.$attrs,
-        component._props
+      expect(wrapper.vm.$refs.component.$props.options).toMatchObject(
+        propsData.options
       );
-
-      optionKeys.forEach(key => {
-        expect(mergedAttrsAndProps[key]).toBe(propsData.options[key]);
-      });
     });
   });
 };
@@ -105,34 +98,50 @@ describe("FlexibleFormInput", () => {
     testComponentType(propsData);
   });
 
-  describe("Component Groups", () => {
+  describe("Radio Group", () => {
     const radioGroup = {
       type: "radio-group",
       value: "Kampala",
+      name: "town",
+      options: {
+        label: "town"
+      },
       children: [
         { type: "radio", value: "Kampala", options: { label: "Kampala" } },
         { type: "radio", value: "Jinja", options: { label: "Jinja" } }
       ]
     };
     it("Renders items in the children property\
-     as VDataFormItem objects that are children to main component", async () => {
+     as v-radio components wrapped under the radio-group", async () => {
       let wrapper = mount(VDataFormItem, {
         propsData: radioGroup
       });
       await wrapper.vm.$nextTick();
-      const allChildDataFormItems = wrapper.findAll(
-        '[data-test="v-data-form-item-children"]'
+
+      const allChildRadios = wrapper.findAll(
+        '[data-test="v-data-radio-group-child"]'
       ).wrappers;
-      const allPropsOfChildDataFormItems = allChildDataFormItems.map(formItem =>
-        formItem.props()
-      );
-      const expectedRadioProps = radioGroup.children.map(radioData => ({
-        children: [],
-        ...radioData
-      }));
-      expect(allPropsOfChildDataFormItems).toEqual(
-        expect.arrayContaining(expectedRadioProps)
-      );
+      const childRadioAttributes = allChildRadios.map(formItem => {
+        const element = formItem.element;
+        const attributes = {};
+        element.getAttributeNames().forEach(value => {
+          attributes[value] = element.getAttribute(value);
+        });
+        return {
+          attributes
+        };
+      });
+
+      radioGroup.children.forEach((child, index) => {
+        expect(childRadioAttributes[index].attributes.type).toBe(child.type);
+        expect(childRadioAttributes[index].attributes.value).toBe(child.value);
+        expect(childRadioAttributes[index].attributes["aria-label"]).toBe(
+          child.options.label
+        );
+        expect(childRadioAttributes[index].attributes["aria-checked"]).toBe(
+          (child.value === radioGroup.value).toString()
+        );
+      });
     });
   });
 });

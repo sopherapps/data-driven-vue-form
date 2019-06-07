@@ -1,14 +1,19 @@
 {
   "name": "v-data-form",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "main": "./dist/v-data-form.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build-bundle": "vue-cli-service build --target lib --name v-data-form ./src/components/index.js",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "prepare": "npm run build-bundle",
+    "prepublishOnly": "npm run test:unit && npm run lint",
+    "preversion": "npm run lint",
+    "version": "git add -A src && git add -A docs",
+    "postversion": "git push && git push --tags"
   },
   "dependencies": {
     "core-js": "^2.6.5",
@@ -16,6 +21,8 @@
     "vuetify": "^1.5.5"
   },
   "devDependencies": {
+    "@editorjs/code": "^2.4.1",
+    "@editorjs/editorjs": "^2.13.0",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",
     "@vue/cli-plugin-unit-jest": "^3.8.0",

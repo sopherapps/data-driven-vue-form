@@ -7,29 +7,41 @@
     data-test="v-data-form-root"
   >
     <v-data-form-item
-      v-for="formItem in formData"
+      v-for="(formItem, index) in model"
       :type="formItem.type"
       :options="formItem.options"
-      :key="formItem.name"
-      v-model="output[formItem.name]"
+      :key="index"
+      :children="formItem.children"
+      v-model="model[index].value"
+      @update="update"
+      @change="change"
+      @input="input"
     ></v-data-form-item>
-    <v-btn data-test="v-data-form-submission-btn" @click="submit()">{{
-      submissionButtonLabel
-    }}</v-btn>
-    <v-btn data-test="v-data-form-cancellation-btn" @click="cancel()">{{
-      cancellationButtonLabel
-    }}</v-btn>
+    <v-layout>
+      <v-btn
+        data-test="v-data-form-submission-btn"
+        @click="submit()"
+        color="primary"
+        >{{ submissionButtonLabel }}</v-btn
+      >
+      <v-spacer />
+      <v-btn data-test="v-data-form-cancellation-btn" @click="cancel()">
+        {{ cancellationButtonLabel }}
+      </v-btn>
+    </v-layout>
   </v-form>
 </template>
 
 <script>
 import VDataFormItem from "./VDataFormItem.vue";
+import CustomComponentMixin from "./mixins/CustomComponentMixin.js";
 export default {
   components: {
     VDataFormItem
   },
   props: {
-    formData: {
+    //formData: {
+    value: {
       // Array of objects with properties; 'type', 'value', 'options'
       type: Array,
       default: () => [],
@@ -63,6 +75,11 @@ export default {
         styleString += `${styleProp}: ${this.styleObj[styleProp]};`;
       });
       return styleString;
+    },
+    output() {
+      return new Map(
+        this.model.map(formItem => [formItem.name, formItem.value])
+      );
     }
   },
   methods: {
@@ -77,20 +94,20 @@ export default {
     cancel() {
       this.$emit("cancel", this.output);
     },
-    generateOutput() {
-      const tmp = {};
-      this.formData.forEach(formItem => {
-        tmp[formItem.name] = formItem.value;
-      });
-      this.output = { ...tmp };
+    change() {
+      this.$emit("change", this.model);
+    },
+    input() {
+      this.$emit("input", this.model);
+    },
+    update(value) {
+      const tmp = { ...this.model[value.key], value: value.model };
+      this.model.splice(value.key, 1, tmp);
     }
   },
   data: () => ({
-    output: {},
     valid: true
   }),
-  mounted() {
-    this.generateOutput();
-  }
+  mixins: [CustomComponentMixin]
 };
 </script>

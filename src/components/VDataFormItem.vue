@@ -1,29 +1,21 @@
 <template>
-  <component
-    ref="component"
-    :is="vType"
-    v-model="value"
-    v-bind="options"
-    @change="updateModel('change')"
-    @input="updateModel('input')"
-  >
-    <div v-if="children.length > 0">
-      <v-data-form-item
-        data-test="v-data-form-item-children"
-        v-for="(child, index) in children"
-        :type="child.type"
-        v-model="child.value"
-        :key="index"
-        :options="child.options"
-        :children="child.children"
-      ></v-data-form-item>
-    </div>
-  </component>
+  <div>
+    <component
+      ref="component"
+      :is="vType"
+      v-model="model"
+      :options="options"
+      :children="children"
+      @input="onInput"
+      @change="updateModel"
+    ></component>
+  </div>
 </template>
 
 <script>
-import CAutocomplete from "./custom/CAutocomplete";
+import CustomComponentMixin from "./mixins/CustomComponentMixin.js";
 
+import CAutocomplete from "./custom/CAutocomplete";
 import CCheckbox from "./custom/CCheckbox";
 import CCombobox from "./custom/CCombobox";
 import CInput from "./custom/CInput";
@@ -74,6 +66,9 @@ export default {
       type: Object,
       default: () => ({})
     },
+    parentValue: {
+      type: [Object, String, Number]
+    },
     children: {
       type: Array,
       default: () => [],
@@ -89,17 +84,23 @@ export default {
     }
   },
   methods: {
-    updateModel(event) {
-      this.$emit(event, this.value);
+    updateModel(value) {
+      this.$emit("update", { key: this.$vnode.key, model: value });
+      this.onChange(value);
     },
     getVtype(type) {
       return ALLOWED_COMPONENTS.get(type);
+    },
+    parentChange(newValue) {
+      this.model = newValue;
+      this.onChange(); // from mixin
     }
   },
   computed: {
     vType() {
       return ALLOWED_COMPONENTS.get(this.type);
     }
-  }
+  },
+  mixins: [CustomComponentMixin]
 };
 </script>
