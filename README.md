@@ -1,4 +1,4 @@
-# v-data-form
+# v-data-form [![Build Status](https://travis-ci.org/sopherapps/v-data-form.svg?branch=master)](https://travis-ci.org/sopherapps/v-data-form)
 
 A vue form whose UI and behaviour are only determined by the data input in it.
 
@@ -9,27 +9,27 @@ A vue form whose UI and behaviour are only determined by the data input in it.
 
 ## Usage
 
-__Don't use just yet. We are still building!__
+**Don't use just yet. We are still building!**
 
 ### Installation
 
 1. You can get this as an NPM package in your app
 
-    ```bash
-    npm install --save v-data-form
-    ```
+   ```bash
+   npm install --save v-data-form
+   ```
 
-2. Go to your ```main.js``` or whatever entry file you use for you project and import v-data-form
+2. Go to your `main.js` or whatever entry file you use for you project and import v-data-form
 
-    ```Javascript
-    import 'v-data-form'
-    ```
+   ```Javascript
+   import 'v-data-form'
+   ```
 
-3. In any of your component templates, just use the ```<v-data-form></v-data-form>``` tags e.g.
+3. In any of your component templates, just use the `<v-data-form></v-data-form>` tags e.g.
 
-    ```html
-    <v-data-form form-data="yourData"></v-data-form>
-    ```
+   ```html
+   <v-data-form form-data="yourData"></v-data-form>
+   ```
 
 ### Data Schema
 
@@ -77,7 +77,7 @@ props: {
 }
 ```
 
-Each item in the 'formData' property (shown above), must have at least two properties; the __type__ and the __name__:
+Each item in the 'formData' property (shown above), must have at least two properties; the **type** and the **name**:
 
 <dl>
 <dt><strong>type</strong></dt>
@@ -95,6 +95,7 @@ This is the name of the type of element to render. It can be any of the followin
 - 'checkbox'
 
 More are being added to the list.
+
 </dd>
 <dt><strong>name</strong></dt>
 <dd>
@@ -102,7 +103,7 @@ This is the unique name of that element. It is the key while the element's value
 </dd>
 </dl>
 
-It can also have three other properties; __value__, __options__ and __children__
+It can also have three other properties; **value**, **options** and **children**
 
 <dl>
 <dt><strong>value</strong></dt>
@@ -126,12 +127,13 @@ To get the possible props for any given element type, search for that type on th
 This is a list of child element that the current element will wrap around. An example is a <strong>radio-group</strong> has a number of child <strong>radio</strong> elements.
 
 Each child element can also have a name, type, options and other children.
+
 </dd>
 </dl>
 
 ### Output
 
-The form has a property called ```formOutput``` which is an object holding the values of each element in the form, the keys being the names of those elements.
+The form has a property called `formOutput` which is an object holding the values of each element in the form, the keys being the names of those elements.
 
 For example, basing on the example 'formData' property of the props in the code section under 'Data Schema', here is the formOutput
 
@@ -182,7 +184,7 @@ methods: {
 }
 ```
 
-__The formOutput is accessible to the 'submit' and 'cancel' event handlers.__
+**The formOutput is accessible to the 'submit' and 'cancel' event handlers.**
 
 ## Acknowledgements
 
