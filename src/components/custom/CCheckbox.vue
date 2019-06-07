@@ -1,18 +1,18 @@
 <template>
-  <v-textarea
+  <v-checkbox
     v-model="model"
     v-bind="options"
     @change="onChange"
     @input="onInput"
   >
     <slot />
-  </v-textarea>
+  </v-checkbox>
 </template>
 
 <script>
 import CustomComponentMixin from "../mixins/CustomComponentMixin";
 export default {
-  name: "c-textarea",
+  name: "c-checkbox",
   mixins: [CustomComponentMixin]
 };
 </script>

@@ -1,10 +1,14 @@
 <template>
-  <v-autocomplete
-    v-model="model"
-    v-bind="options"
-    @change="onChange"
-    @input="onInput"
-  ></v-autocomplete>
+  <div>
+    <v-autocomplete
+      v-model="model"
+      v-bind="options"
+      @change="onChange"
+      @input="onInput"
+    >
+      <slot />
+    </v-autocomplete>
+  </div>
 </template>
 
 <script>

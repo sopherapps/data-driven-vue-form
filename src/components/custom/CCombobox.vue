@@ -1,18 +1,18 @@
 <template>
-  <v-textarea
+  <v-combobox
     v-model="model"
     v-bind="options"
     @change="onChange"
     @input="onInput"
   >
     <slot />
-  </v-textarea>
+  </v-combobox>
 </template>
 
 <script>
 import CustomComponentMixin from "../mixins/CustomComponentMixin";
 export default {
-  name: "c-textarea",
+  name: "c-combobox",
   mixins: [CustomComponentMixin]
 };
 </script>

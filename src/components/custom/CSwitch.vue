@@ -1,16 +1,18 @@
 <template>
-  <v-btn
+  <v-switch
     v-model="model"
     v-bind="options"
     @change="onChange"
     @input="onInput"
-  ></v-btn>
+  >
+    <slot />
+  </v-switch>
 </template>
 
 <script>
 import CustomComponentMixin from "../mixins/CustomComponentMixin";
 export default {
-  name: "c-btn",
+  name: "c-switch",
   mixins: [CustomComponentMixin]
 };
 </script>
