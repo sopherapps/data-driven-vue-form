@@ -144,18 +144,18 @@ export default {
 
 <style>
 .ce-code__textarea {
-  min-height: 85vh;
-  color: #fff;
-  background-color: #444;
-  font-size: 1rem;
+  min-height: 85vh !important;
+  color: #fff !important;
+  background-color: #444 !important;
+  font-size: 1rem !important;
 }
 .grey-background {
-  background-color: #eee;
+  background-color: #eee !important;
 }
 .white-background {
-  background-color: #fff;
+  background-color: #fff !important;
 }
 .codex-editor__redactor {
-  padding-bottom: 10px;
+  padding-bottom: 10px !important;
 }
 </style>
