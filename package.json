@@ -16,6 +16,8 @@
     "vuetify": "^1.5.5"
   },
   "devDependencies": {
+    "@editorjs/code": "^2.4.1",
+    "@editorjs/editorjs": "^2.13.0",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",
     "@vue/cli-plugin-unit-jest": "^3.8.0",

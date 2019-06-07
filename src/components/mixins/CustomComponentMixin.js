@@ -9,6 +9,11 @@ export default {
   mounted() {
     this.model = this.value;
   },
+  watch: {
+    value: function(val) {
+      this.model = val;
+    }
+  },
   methods: {
     onChange() {
       this.$emit("change", this.model);
