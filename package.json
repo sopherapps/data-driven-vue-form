@@ -1,7 +1,7 @@
 {
   "name": "v-data-form",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "main": "./dist/v-data-form.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",

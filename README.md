@@ -2,6 +2,10 @@
 
 A vue form whose UI and behaviour are only determined by the data input in it.
 
+## Demo
+
+Checkout the [demo](https://sopherapps.github.io/v-data-form/)
+
 ## Dependencies
 
 1. [Vuejs +v2.6.10](https://vuejs.org)
