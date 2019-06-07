@@ -5,25 +5,10 @@
       :is="vType"
       v-model="model"
       :options="options"
+      :children="children"
       @input="onInput"
-      @change="onChange"
-    >
-      <div v-if="children.length > 0">
-        <v-data-form-item
-          data-test="v-data-form-item-children"
-          v-for="(child, index) in children"
-          :type="child.type"
-          :name="child.value"
-          v-model="child.value"
-          :key="index"
-          :options="child.options"
-          :children="child.children"
-          :parent-value="model"
-          @change="parentChange"
-        ></v-data-form-item>
-      </div>
-    </component>
-    {{ model }} {{ value }}
+      @change="updateModel"
+    ></component>
   </div>
 </template>
 
@@ -99,8 +84,9 @@ export default {
     }
   },
   methods: {
-    updateModel(event) {
-      this.$emit(event, this.value);
+    updateModel(value) {
+      this.$emit("update", { key: this.$vnode.key, model: value });
+      this.onChange(value);
     },
     getVtype(type) {
       return ALLOWED_COMPONENTS.get(type);

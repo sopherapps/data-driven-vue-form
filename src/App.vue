@@ -18,12 +18,14 @@
         </v-flex>
         <v-flex xs12 md6>
           <v-container>
-            <v-data-form v-model="formData"></v-data-form>
+            <v-data-form
+              v-model="formData"
+              @change="refreshEditor"
+            ></v-data-form>
           </v-container>
         </v-flex>
         <v-flex xs12 md6 justify-center id="codex-editor"></v-flex>
       </v-layout>
-      {{ formData }}
       <v-snackbar v-model="snackbar" :color="status" v-if="message">
         {{ message }}
         <v-btn dark flat @click="hideSnackbar()">Close</v-btn>
@@ -46,6 +48,7 @@ export default {
   data: () => ({
     snackbar: false,
     message: "",
+    editorInitialized: false,
     status: "info",
     time: new Date(),
     version: "2.12.4",
@@ -105,6 +108,23 @@ export default {
         this.showSnackbar(err.message, "error");
       }
     },
+    async refreshEditor() {
+      if (this.editorInitialized) {
+        this.editor.destroy();
+      }
+      this.editor = new EditorJS({
+        holder: "codex-editor",
+        tools: {
+          code: {
+            class: Code,
+            inlineToolbar: true
+          }
+        },
+        data: this.transformDataToEditorjs()
+      });
+      await this.editor.isReady;
+      this.editorInitialized = true;
+    },
     showSnackbar(message, status) {
       this.message = message;
       this.snackbar = true;
@@ -116,17 +136,8 @@ export default {
       this.status = "info";
     }
   },
-  mounted() {
-    this.editor = new EditorJS({
-      holderId: "codex-editor",
-      tools: {
-        code: {
-          class: Code,
-          inlineToolbar: true
-        }
-      },
-      data: this.transformDataToEditorjs()
-    });
+  async mounted() {
+    await this.refreshEditor();
   }
 };
 </script>

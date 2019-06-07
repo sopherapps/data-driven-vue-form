@@ -7,12 +7,13 @@
     data-test="v-data-form-root"
   >
     <v-data-form-item
-      v-for="formItem in model"
+      v-for="(formItem, index) in model"
       :type="formItem.type"
       :options="formItem.options"
-      :key="formItem.name"
+      :key="index"
       :children="formItem.children"
-      v-model="formItem.value"
+      v-model="model[index].value"
+      @update="update"
       @change="change"
       @input="input"
     ></v-data-form-item>
@@ -21,13 +22,12 @@
         data-test="v-data-form-submission-btn"
         @click="submit()"
         color="primary"
+        >{{ submissionButtonLabel }}</v-btn
       >
-        {{ submissionButtonLabel }}
-      </v-btn>
       <v-spacer />
-      <v-btn data-test="v-data-form-cancellation-btn" @click="cancel()">
-        {{ cancellationButtonLabel }}
-      </v-btn>
+      <v-btn data-test="v-data-form-cancellation-btn" @click="cancel()">{{
+        cancellationButtonLabel
+      }}</v-btn>
     </v-layout>
   </v-form>
 </template>
@@ -99,15 +99,15 @@ export default {
     },
     input() {
       this.$emit("input", this.model);
+    },
+    update(value) {
+      const tmp = { ...this.model[value.key], value: value.model };
+      this.model.splice(value.key, 1, tmp);
     }
   },
   data: () => ({
-    // output: {},
     valid: true
   }),
-  mounted() {
-    // this.generateOutput();
-  },
   mixins: [CustomComponentMixin]
 };
 </script>
