@@ -6,6 +6,7 @@
     @input="onInput"
   >
     <v-radio
+      data-test="v-data-radio-group-child"
       v-for="(child, index) in radioChildren"
       :key="index"
       :value="child.value"
