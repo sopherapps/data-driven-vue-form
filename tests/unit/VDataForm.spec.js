@@ -67,7 +67,7 @@ describe("VDataForm", () => {
     beforeEach(() => {
       wrapper = shallowMount(VDataForm, {
         propsData: {
-          formData,
+          value: formData,
           styleObj,
           submissionButtonLabel,
           cancellationButtonLabel
@@ -83,10 +83,10 @@ describe("VDataForm", () => {
       const formDataLackingType = formData.concat([
         { name: "input", options: { type: "email" } }
       ]);
-      const formDataProp = wrapper.vm.$options.props.formData;
-      expect(formDataProp.validator(formDataLackingName)).toBeFalsy();
-      expect(formDataProp.validator(formDataLackingType)).toBeFalsy();
-      expect(formDataProp.validator(formData)).toBeTruthy();
+      const valueProp = wrapper.vm.$options.props.value;
+      expect(valueProp.validator(formDataLackingName)).toBeFalsy();
+      expect(valueProp.validator(formDataLackingType)).toBeFalsy();
+      expect(valueProp.validator(formData)).toBeTruthy();
     });
 
     it("Mounts VDataFormItem components,\
@@ -143,7 +143,7 @@ describe("VDataForm", () => {
       jest.resetAllMocks();
       wrapper = mount(VDataForm, {
         propsData: {
-          formData,
+          value: formData,
           styleObj,
           submissionButtonLabel,
           cancellationButtonLabel
@@ -181,7 +181,9 @@ describe("VDataForm", () => {
           .trigger("click");
         await wrapper.vm.$nextTick();
         expect(wrapper.emitted().submit.length).toBe(1);
-        expect(submissionHandler).toHaveBeenCalledWith(expectedFormOutput);
+        expect(submissionHandler).toHaveBeenCalledWith(
+          new Map(Object.entries(expectedFormOutput))
+        );
       });
     });
 
@@ -193,7 +195,9 @@ describe("VDataForm", () => {
           .trigger("click");
         await wrapper.vm.$nextTick();
         expect(wrapper.emitted().cancel.length).toBe(1);
-        expect(cancellationHandler).toHaveBeenCalledWith(expectedFormOutput);
+        expect(cancellationHandler).toHaveBeenCalledWith(
+          new Map(Object.entries(expectedFormOutput))
+        );
       });
     });
   });
