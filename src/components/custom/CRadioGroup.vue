@@ -4,6 +4,7 @@
     v-bind="options"
     @change="onChange"
     @input="onInput"
+    data-test="c-radio-group"
   >
     <v-radio
       data-test="v-data-radio-group-child"
