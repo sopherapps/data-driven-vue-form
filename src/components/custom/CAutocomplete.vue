@@ -5,6 +5,7 @@
       v-bind="options"
       @change="onChange"
       @input="onInput"
+      data-test="c-autocomplete"
     >
       <slot />
     </v-autocomplete>

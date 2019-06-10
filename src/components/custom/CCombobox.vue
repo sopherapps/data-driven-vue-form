@@ -4,6 +4,7 @@
     v-bind="options"
     @change="onChange"
     @input="onInput"
+    data-test="c-combobox"
   >
     <slot />
   </v-combobox>

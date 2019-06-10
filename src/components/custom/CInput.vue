@@ -1,5 +1,11 @@
 <template>
-  <v-input v-model="model" v-bind="options" @change="onChange" @input="onInput">
+  <v-input
+    v-model="model"
+    v-bind="options"
+    @change="onChange"
+    @input="onInput"
+    data-test="c-input"
+  >
     <slot />
   </v-input>
 </template>

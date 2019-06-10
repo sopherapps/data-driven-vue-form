@@ -53,7 +53,7 @@ export default {
     time: new Date(),
     version: "2.12.4",
     editor: undefined,
-    formData: [
+    formDataString: `[
       {
         type: "text-field",
         value: "hello world",
@@ -79,8 +79,10 @@ export default {
           { type: "radio", value: "Jinja", options: { label: "Jinja" } }
         ]
       }
-    ]
+    ]`,
+    formData: []
   }),
+  computed: {},
   methods: {
     transformDataToEditorjs() {
       return {
@@ -89,24 +91,33 @@ export default {
           {
             type: "code",
             data: {
-              code: JSON.stringify(this.formData, null, 2)
+              code: this.formDataString
             }
           }
         ],
         version: this.version
       };
     },
+    cleanEditorData(editorData) {
+      return editorData.replace("&gt;", ">").replace("&lt;", "<");
+    },
     async refreshForm() {
       try {
         const data = await this.editor.save();
+        console.log(data);
         const codeBlocks = data.blocks.filter(value => value.type === "code");
         if (codeBlocks.length > 0) {
-          this.formData = JSON.parse(codeBlocks[0].data.code);
+          // this.formData = JSON.parse(codeBlocks[0].data.code);
+          this.formDataString = this.cleanEditorData(codeBlocks[0].data.code);
+          this.updateFormData();
         }
         this.showSnackbar("Form refreshed", "success");
       } catch (err) {
         this.showSnackbar(err.message, "error");
       }
+    },
+    updateFormData() {
+      this.formData = eval(this.formDataString);
     },
     async refreshEditor() {
       if (this.editorInitialized) {
@@ -137,6 +148,7 @@ export default {
     }
   },
   async mounted() {
+    this.updateFormData();
     await this.refreshEditor();
   }
 };

@@ -4,6 +4,7 @@
     v-bind="options"
     @change="onChange"
     @input="onInput"
+    data-test="c-textarea"
   >
     <slot />
   </v-textarea>

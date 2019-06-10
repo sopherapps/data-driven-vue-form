@@ -75,6 +75,18 @@ describe("VDataForm", () => {
       });
     });
 
+    it("Throws no error when value is undefined", () => {
+      expect(() =>
+        shallowMount(VDataForm, {
+          propsData: {
+            styleObj,
+            submissionButtonLabel,
+            cancellationButtonLabel
+          }
+        })
+      ).not.toThrow();
+    });
+
     it("Throws error if any item in formData lacks the name or type property", async () => {
       await wrapper.vm.$nextTick();
       const formDataLackingName = formData.concat([

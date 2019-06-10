@@ -25,9 +25,9 @@
         >{{ submissionButtonLabel }}</v-btn
       >
       <v-spacer />
-      <v-btn data-test="v-data-form-cancellation-btn" @click="cancel()">
-        {{ cancellationButtonLabel }}
-      </v-btn>
+      <v-btn data-test="v-data-form-cancellation-btn" @click="cancel()">{{
+        cancellationButtonLabel
+      }}</v-btn>
     </v-layout>
   </v-form>
 </template>
@@ -46,6 +46,7 @@ export default {
       type: Array,
       default: () => [],
       validator: value =>
+        value.length == 0 ||
         value.reduce(
           (accumulator, currentValue) =>
             accumulator &&
