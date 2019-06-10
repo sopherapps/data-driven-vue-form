@@ -25,9 +25,9 @@
         >{{ submissionButtonLabel }}</v-btn
       >
       <v-spacer />
-      <v-btn data-test="v-data-form-cancellation-btn" @click="cancel()">{{
-        cancellationButtonLabel
-      }}</v-btn>
+      <v-btn data-test="v-data-form-cancellation-btn" @click="cancel()">
+        {{ cancellationButtonLabel }}
+      </v-btn>
     </v-layout>
   </v-form>
 </template>
@@ -36,6 +36,7 @@
 import VDataFormItem from "./VDataFormItem.vue";
 import CustomComponentMixin from "./mixins/CustomComponentMixin.js";
 export default {
+  name: "v-data-form",
   components: {
     VDataFormItem
   },

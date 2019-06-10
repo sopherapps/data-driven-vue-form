@@ -23,10 +23,16 @@ Checkout the [demo](https://sopherapps.github.io/v-data-form/)
    npm install --save v-data-form
    ```
 
-2. Go to your `main.js` or whatever entry file you use for you project and import v-data-form
+2. Go to your `vuetify.js` plugin file in your plugin folder (Vuetify is needed for this) and import and register v-data-form globally
 
    ```Javascript
-   import 'v-data-form'
+    import VDataForm from "v-data-form";
+
+    Vue.use(Vuetify, {
+      iconfont: "md"
+    });
+
+    Vue.component("v-data-form", VDataForm);
    ```
 
 3. In any of your component templates, just use the `<v-data-form></v-data-form>` tags e.g.

@@ -1,17 +1,11 @@
 import Vue from "vue";
-import Vuetify from "vuetify";
-import VDataFormItem from "./VDataFormItem.vue";
+import Vuetify from "vuetify/lib";
+import "vuetify/src/stylus/app.styl";
 import VDataForm from "./VDataForm.vue";
 
-Vue.use(Vuetify);
-
-const Components = {
-  VDataFormItem,
-  VDataForm
-};
-
-Object.keys(Components).forEach(name => {
-  Vue.component(name, Components[name]);
+Vue.use(Vuetify, {
+  iconfont: "md"
 });
 
-export default Components;
+Vue.component("v-data-form", VDataForm);
+export default VDataForm;

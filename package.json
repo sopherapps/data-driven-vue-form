@@ -3,6 +3,7 @@
   "version": "0.1.2",
   "private": false,
   "main": "./dist/v-data-form.common.js",
+  "unpkg": "./dist/v-data-form.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
