@@ -25,9 +25,9 @@
         >{{ submissionButtonLabel }}</v-btn
       >
       <v-spacer />
-      <v-btn data-test="v-data-form-cancellation-btn" @click="cancel()">
-        {{ cancellationButtonLabel }}
-      </v-btn>
+      <v-btn data-test="v-data-form-cancellation-btn" @click="cancel()">{{
+        cancellationButtonLabel
+      }}</v-btn>
     </v-layout>
   </v-form>
 </template>
@@ -41,7 +41,6 @@ export default {
     VDataFormItem
   },
   props: {
-    //formData: {
     value: {
       // Array of objects with properties; 'type', 'value', 'options'
       type: Array,
