@@ -1,3 +1,8 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === "production" ? "/v-data-form/" : "/"
+  publicPath: process.env.NODE_ENV === "production" ? "/v-data-form/" : "/",
+  configureWebpack: {
+    externals: {
+      vuetify: "vuetify"
+    }
+  }
 };

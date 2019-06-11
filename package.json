@@ -1,8 +1,9 @@
 {
   "name": "v-data-form",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "private": false,
   "main": "./dist/v-data-form.common.js",
+  "unpkg": "./dist/v-data-form.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -12,7 +13,7 @@
     "prepare": "npm run build-bundle",
     "prepublishOnly": "npm run test:unit && npm run lint",
     "preversion": "npm run lint",
-    "version": "git add -A src && git add -A docs",
+    "version": "git add -A src",
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
