@@ -59,16 +59,13 @@ export default {
       validator: value => ALLOWED_COMPONENTS.has(value)
     },
     value: {
-      type: [String, Boolean, Object, Array],
+      type: [Array, Boolean, Number, Object, String],
       default: ""
     },
     options: {
       type: Object,
       default: () => ({})
     },
-    // parentValue: {
-    //   type: [Object, String, Number]
-    // },
     children: {
       type: Array,
       default: () => [],

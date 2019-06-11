@@ -21,7 +21,7 @@
 // https://www.typescriptlang.org/docs/handbook/modules.html#export--and-import--require
 // to understand common workarounds for this limitation of ES6 modules.
 
-import { Vue } from "vue";
+import Vue from "vue";
 
 interface formItem {
   type: string;
