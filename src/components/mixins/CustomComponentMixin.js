@@ -1,7 +1,7 @@
 export default {
   props: {
     options: Object,
-    value: [Object, String, Number]
+    value: [Array, Boolean, Number, Object, String]
   },
   data: () => ({
     model: undefined
