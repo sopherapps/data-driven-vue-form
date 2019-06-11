@@ -1,6 +1,6 @@
 {
   "name": "v-data-form",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": false,
   "types": "./types/index.d.ts",
   "main": "./dist/v-data-form.common.js",
