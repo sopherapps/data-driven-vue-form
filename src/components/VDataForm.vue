@@ -7,15 +7,13 @@
     data-test="v-data-form-root"
   >
     <v-data-form-item
-      v-for="(formItem, index) in model"
+      v-for="(formItem, index) in value"
       :type="formItem.type"
       :options="formItem.options"
       :key="index"
       :children="formItem.children"
-      v-model="model[index].value"
+      :value="value[index].value"
       @update="update"
-      @change="change"
-      @input="input"
     ></v-data-form-item>
     <v-layout>
       <v-btn
@@ -25,9 +23,9 @@
         >{{ submissionButtonLabel }}</v-btn
       >
       <v-spacer />
-      <v-btn data-test="v-data-form-cancellation-btn" @click="cancel()">{{
-        cancellationButtonLabel
-      }}</v-btn>
+      <v-btn data-test="v-data-form-cancellation-btn" @click="cancel()">
+        {{ cancellationButtonLabel }}
+      </v-btn>
     </v-layout>
   </v-form>
 </template>
@@ -79,7 +77,7 @@ export default {
     },
     output() {
       return new Map(
-        this.model.map(formItem => [formItem.name, formItem.value])
+        this.value.map(formItem => [formItem.name, formItem.value])
       );
     }
   },
@@ -95,15 +93,11 @@ export default {
     cancel() {
       this.$emit("cancel", this.output);
     },
-    change() {
-      this.$emit("change", this.model);
-    },
-    input() {
-      this.$emit("input", this.model);
-    },
     update(value) {
-      const tmp = { ...this.model[value.key], value: value.model };
-      this.model.splice(value.key, 1, tmp);
+      const tmpArray = Array.from(this.value);
+      const tmp = { ...tmpArray[value.key], value: value.model };
+      tmpArray.splice(value.key, 1, tmp);
+      this.$emit("change", tmpArray);
     }
   },
   data: () => ({

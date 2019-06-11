@@ -3,10 +3,10 @@
     <component
       ref="component"
       :is="vType"
-      v-model="model"
+      :value="value"
       :options="options"
       :children="children"
-      @input="onInput"
+      @input="updateModel"
       @change="updateModel"
     ></component>
   </div>
@@ -83,10 +83,7 @@ export default {
   methods: {
     updateModel(value) {
       this.$emit("update", { key: this.$vnode.key, model: value });
-      this.onChange(value);
-    },
-    getVtype(type) {
-      return ALLOWED_COMPONENTS.get(type);
+      // this.onChange(value);
     },
     parentChange(newValue) {
       this.model = newValue;

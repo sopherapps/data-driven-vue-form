@@ -1,7 +1,6 @@
 <template>
   <v-radio
-    :value="model"
-    v-model="parentValue"
+    :value="value"
     v-bind="options"
     @change="onChange"
     @input="onInput"
@@ -15,11 +14,6 @@
 import CustomComponentMixin from "../mixins/CustomComponentMixin";
 export default {
   name: "c-radio",
-  mixins: [CustomComponentMixin],
-  props: {
-    parentValue: {
-      type: [String, Number, Object]
-    }
-  }
+  mixins: [CustomComponentMixin]
 };
 </script>

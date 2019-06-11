@@ -119,7 +119,15 @@ export default {
     updateFormData() {
       this.formData = eval(this.formDataString);
     },
-    async refreshEditor() {
+    async refreshEditor(value) {
+      console.log(value);
+      try {
+        this.formDataString = value
+          ? JSON.stringify(value, null, 4)
+          : this.formDataString;
+      } catch (err) {
+        console.log(err);
+      }
       if (this.editorInitialized) {
         this.editor.destroy();
       }
