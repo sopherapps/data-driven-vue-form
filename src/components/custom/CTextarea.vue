@@ -1,6 +1,6 @@
 <template>
   <v-textarea
-    v-model="model"
+    :value="value"
     v-bind="options"
     @change="onChange"
     @input="onInput"
