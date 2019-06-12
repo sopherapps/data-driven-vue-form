@@ -56,7 +56,7 @@ export default {
     formDataString: `[
       {
         type: "text-field",
-        value: "hello world",
+        value: "",
         name: "greetingInput",
         options: {
           style: { color: "blue" }

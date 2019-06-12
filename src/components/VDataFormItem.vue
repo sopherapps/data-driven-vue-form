@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <component
-      ref="component"
-      :is="vType"
-      :value="value"
-      :options="options"
-      :children="children"
-      @input="updateModel"
-      @change="updateModel"
-    ></component>
-  </div>
+  <component
+    ref="component"
+    :is="vType"
+    :value="value"
+    :options="options"
+    :children="children"
+    @input="updateModel"
+    @change="updateModel"
+  ></component>
 </template>
 
 <script>
@@ -59,8 +57,8 @@ export default {
       validator: value => ALLOWED_COMPONENTS.has(value)
     },
     value: {
-      type: [Array, Boolean, Number, Object, String],
-      default: ""
+      // type: [Array, Number, Object, String]
+      // default: ""
     },
     options: {
       type: Object,
@@ -83,11 +81,6 @@ export default {
   methods: {
     updateModel(value) {
       this.$emit("update", { key: this.$vnode.key, model: value });
-      // this.onChange(value);
-    },
-    parentChange(newValue) {
-      this.model = newValue;
-      this.onChange(); // from mixin
     }
   },
   computed: {

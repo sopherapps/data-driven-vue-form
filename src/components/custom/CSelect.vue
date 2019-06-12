@@ -14,6 +14,12 @@
 import CustomComponentMixin from "../mixins/CustomComponentMixin";
 export default {
   name: "c-select",
-  mixins: [CustomComponentMixin]
+  mixins: [CustomComponentMixin],
+  props: {
+    value: {
+      type: [Number, String, Object],
+      default: ""
+    }
+  }
 };
 </script>

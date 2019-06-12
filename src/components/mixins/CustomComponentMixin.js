@@ -1,7 +1,6 @@
 export default {
   props: {
-    options: Object,
-    value: [Array, Boolean, Number, Object, String]
+    options: Object
   },
   methods: {
     onChange(value) {
