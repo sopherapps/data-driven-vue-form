@@ -14,6 +14,12 @@
 import CustomComponentMixin from "../mixins/CustomComponentMixin";
 export default {
   name: "c-switch",
-  mixins: [CustomComponentMixin]
+  mixins: [CustomComponentMixin],
+  props: {
+    value: {
+      type: Boolean,
+      default: false
+    }
+  }
 };
 </script>

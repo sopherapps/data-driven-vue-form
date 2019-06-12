@@ -79,7 +79,7 @@ describe("FlexibleFormInput", () => {
     },
     {
       type: "checkbox",
-      value: "false",
+      value: false,
       options: {
         label: "Kampala",
         color: "red"
@@ -87,7 +87,7 @@ describe("FlexibleFormInput", () => {
     },
     {
       type: "switch",
-      value: "false",
+      value: false,
       options: {
         label: "Kampala",
         color: "red"

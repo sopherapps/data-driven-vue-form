@@ -25,6 +25,10 @@ export default {
     children: {
       type: Array,
       default: () => []
+    },
+    value: {
+      type: [String, Number],
+      default: ""
     }
   },
   computed: {

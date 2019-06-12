@@ -14,6 +14,12 @@
 import CustomComponentMixin from "../mixins/CustomComponentMixin";
 export default {
   name: "c-combobox",
-  mixins: [CustomComponentMixin]
+  mixins: [CustomComponentMixin],
+  props: {
+    value: {
+      type: [Number, String, Object],
+      default: ""
+    }
+  }
 };
 </script>
