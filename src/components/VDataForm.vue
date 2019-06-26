@@ -23,9 +23,9 @@
         >{{ submissionButtonLabel }}</v-btn
       >
       <v-spacer />
-      <v-btn data-test="v-data-form-cancellation-btn" @click="cancel()">{{
-        cancellationButtonLabel
-      }}</v-btn>
+      <v-btn data-test="v-data-form-cancellation-btn" @click="cancel()">
+        {{ cancellationButtonLabel }}
+      </v-btn>
     </v-layout>
   </v-form>
 </template>
@@ -76,9 +76,16 @@ export default {
       return styleString;
     },
     output() {
-      return new Map(
-        this.value.map(formItem => [formItem.name, formItem.value])
-      );
+      const obj = {};
+      for (let item of this.model) {
+        obj[item.name] = item.value;
+      }
+      return obj;
+    }
+  },
+  watch: {
+    value: function(val) {
+      this.model = val;
     }
   },
   methods: {
@@ -94,15 +101,20 @@ export default {
       this.$emit("cancel", this.output);
     },
     update(value) {
-      const tmpArray = Array.from(this.value);
+      const tmpArray = Array.from(this.model);
       const tmp = { ...tmpArray[value.key], value: value.model };
       tmpArray.splice(value.key, 1, tmp);
       this.$emit("change", tmpArray);
+      this.model = tmpArray;
     }
   },
   data: () => ({
-    valid: true
+    valid: true,
+    model: []
   }),
-  mixins: [CustomComponentMixin]
+  mixins: [CustomComponentMixin],
+  mounted() {
+    this.model = Array.from(this.value);
+  }
 };
 </script>
