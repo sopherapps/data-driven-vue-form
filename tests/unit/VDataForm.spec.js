@@ -194,7 +194,8 @@ describe("VDataForm", () => {
         await wrapper.vm.$nextTick();
         expect(wrapper.emitted().submit.length).toBe(1);
         expect(submissionHandler).toHaveBeenCalledWith(
-          new Map(Object.entries(expectedFormOutput))
+          expectedFormOutput
+          // new Map(Object.entries(expectedFormOutput))
         );
       });
     });
@@ -208,7 +209,8 @@ describe("VDataForm", () => {
         await wrapper.vm.$nextTick();
         expect(wrapper.emitted().cancel.length).toBe(1);
         expect(cancellationHandler).toHaveBeenCalledWith(
-          new Map(Object.entries(expectedFormOutput))
+          expectedFormOutput
+          // new Map(Object.entries(expectedFormOutput))
         );
       });
     });
