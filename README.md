@@ -38,21 +38,21 @@ Checkout the [demo](https://sopherapps.github.io/v-data-form/)
 3. In any of your component templates, just use the `<v-data-form></v-data-form>` tags e.g.
 
    ```html
-   <v-data-form form-data="yourData"></v-data-form>
+   <v-data-form v-model="yourData"></v-data-form>
    ```
 
 ### Data Schema
 
 The form receives props:
 
-- formData ('form-data' in template syntax)
+- value (or 'v-model' if you wish)
 - styleObj
 - submissionButtonLabel (submission-button-label in template syntax)
 - cancellationButtonLabel (cancellation-button-label in template syntax)
 
 ```JavaScript
 props: {
-  formData: [ // Array of objects with properties; 'type', 'name', 'value', 'options'
+  value: [ // Array of objects with properties; 'type', 'name', 'value', 'options'
     /* e.g.
     {
       type: "text-field", value: "hello world", name: 'greetingInput',
