@@ -21,6 +21,7 @@
             <v-data-form
               v-model="formData"
               @change="refreshEditor"
+              @submit="doSubmit"
             ></v-data-form>
           </v-container>
         </v-flex>
@@ -98,13 +99,16 @@ export default {
         version: this.version
       };
     },
+    doSubmit(output) {
+      alert(JSON.stringify(output));
+    },
     cleanEditorData(editorData) {
       return editorData.replace("&gt;", ">").replace("&lt;", "<");
     },
     async refreshForm() {
       try {
         const data = await this.editor.save();
-        console.log(data);
+        // console.log(data);
         const codeBlocks = data.blocks.filter(value => value.type === "code");
         if (codeBlocks.length > 0) {
           // this.formData = JSON.parse(codeBlocks[0].data.code);
@@ -120,7 +124,7 @@ export default {
       this.formData = eval(this.formDataString);
     },
     async refreshEditor(value) {
-      console.log(value);
+      // console.log(value);
       try {
         this.formDataString = value
           ? JSON.stringify(value, null, 4)
