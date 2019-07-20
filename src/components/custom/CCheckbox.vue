@@ -1,6 +1,6 @@
 <template>
   <v-checkbox
-    :value="value"
+    v-model="model"
     v-bind="options"
     @change="onChange"
     @input="onInput"
@@ -19,6 +19,25 @@ export default {
     value: {
       type: Boolean,
       default: false
+    }
+  },
+  data: () => ({
+    model: null
+  }),
+  mounted() {
+    this.model = this.value;
+  },
+  watch: {
+    value(val) {
+      this.model = val;
+    }
+  },
+  methods: {
+    onChange() {
+      this.$emit("change", this.model);
+    },
+    onInput() {
+      this.$emit("input", this.model);
     }
   }
 };
