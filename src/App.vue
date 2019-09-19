@@ -64,6 +64,16 @@ export default {
         }
       },
       {
+        type: "text-field",
+        value: 9,
+        name: "exampleNumber",
+        options: {
+          style: { color: "blue" },
+          type: "number",
+          label: "example number"
+        }
+      },
+      {
         type: "autocomplete",
         value: "Kampala",
         name: "district",
